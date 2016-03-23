@@ -11,7 +11,7 @@ import rpc.controller.RPCController;
 /**
  * Main panel for the program
  * @author thod0127
- * @version 1.0 03/23/2016
+ * @version 1.1 03/23/2016
  */
 public class RPCPanel extends JPanel
 {
@@ -25,6 +25,7 @@ public class RPCPanel extends JPanel
 	private JButton paperButton;
 	private JButton scissorButton;
 	private JToggleButton multiplayToggle;
+	private JButton scoreButton;
 	
 	public RPCPanel(RPCController baseController)
 	{
@@ -36,6 +37,7 @@ public class RPCPanel extends JPanel
 		paperButton = new JButton("Paper");
 		scissorButton = new JButton("Scissors");
 		multiplayToggle = new JToggleButton("Multiplayer");
+		scoreButton = new JButton("Scores");
 		
 		setupPanel();
 		setupLayout();
@@ -54,6 +56,8 @@ public class RPCPanel extends JPanel
 		this.add(paperButton);
 		this.add(scissorButton);
 		this.add(multiplayToggle);
+		this.add(scoreButton);
+		scoreButton.setToolTipText("Multiplayer scores are not shown.");
 	}
 	
 	/**
@@ -61,13 +65,15 @@ public class RPCPanel extends JPanel
 	 */
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.WEST, multiplayToggle, 80, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, multiplayToggle, -6, SpringLayout.NORTH, rockButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, scissorButton, 0, SpringLayout.NORTH, rockButton);
 		baseLayout.putConstraint(SpringLayout.WEST, scissorButton, 90, SpringLayout.EAST, rockButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, paperButton, 0, SpringLayout.NORTH, rockButton);
 		baseLayout.putConstraint(SpringLayout.WEST, paperButton, 6, SpringLayout.EAST, rockButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, multiplayToggle, -6, SpringLayout.NORTH, paperButton);
+		baseLayout.putConstraint(SpringLayout.EAST, multiplayToggle, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, rockButton, 45, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, scoreButton, 0, SpringLayout.WEST, rockButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scoreButton, -6, SpringLayout.NORTH, rockButton);
 		baseLayout.putConstraint(SpringLayout.WEST, rockButton, 10, SpringLayout.WEST, this);
 	}
 	
@@ -172,6 +178,14 @@ public class RPCPanel extends JPanel
 				{
 					baseController.getGame().setMultiplayer(true);
 				}
+			}
+		});
+		
+		scoreButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				display.popup("Wins: " + baseController.getGame().getWins() + " Losses: " + baseController.getGame().getLosses() + " Ties: " + baseController.getGame().getTies());
 			}
 		});
 	}

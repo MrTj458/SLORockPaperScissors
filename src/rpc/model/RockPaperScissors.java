@@ -3,13 +3,16 @@ package rpc.model;
 /**
  * Calculates the winners of the game
  * @author thod0127
- * @version 1.0 03/23/2016
+ * @version 1.1 03/23/2016
  */
 public class RockPaperScissors
 {
 	private String p1Selection;
 	private String p2Selection;
 	private boolean isMultiplayer;
+	private int wins;
+	private int losses;
+	private int ties;
 	
 	public RockPaperScissors()
 	{
@@ -109,38 +112,47 @@ public class RockPaperScissors
 		if(p1Selection.equals("rock") && p2Selection.equals("rock"))
 		{
 			winner = "It's a tie!";
+			ties++;
 		}
 		else if(p1Selection.equals("rock") && p2Selection.equals("paper"))
 		{
 			winner = "The bot wins!";
+			losses++;
 		}
 		else if(p1Selection.equals("rock") && p2Selection.equals("scissors"))
 		{
 			winner = "You win!";
+			wins++;
 		}
 		else if(p1Selection.equals("paper") && p2Selection.equals("rock"))
 		{
 			winner = "You win!";
+			wins++;
 		}
 		else if(p1Selection.equals("paper") && p2Selection.equals("paper"))
 		{
 			winner = "It's a tie!";
+			ties++;
 		}
 		else if(p1Selection.equals("paper") && p2Selection.equals("scissors"))
 		{
 			winner = "The bot wins!";
+			wins++;
 		}
 		else if(p1Selection.equals("scissors") && p2Selection.equals("rock"))
 		{
 			winner = "The bot wins!";
+			losses++;
 		}
 		else if(p1Selection.equals("scissors") && p2Selection.equals("paper"))
 		{
 			winner = "You win!";
+			wins++;
 		}
 		else if(p1Selection.equals("scissors") && p2Selection.equals("scissors"))
 		{
 			winner = "It's a tie!";
+			ties++;
 		}
 		else
 		{
@@ -178,5 +190,35 @@ public class RockPaperScissors
 	public void setMultiplayer(boolean isMultiplayer)
 	{
 		this.isMultiplayer = isMultiplayer;
+	}
+
+	public int getWins()
+	{
+		return wins;
+	}
+
+	public void setWins(int wins)
+	{
+		this.wins = wins;
+	}
+
+	public int getLosses()
+	{
+		return losses;
+	}
+
+	public void setLosses(int loses)
+	{
+		this.losses = loses;
+	}
+
+	public int getTies()
+	{
+		return ties;
+	}
+
+	public void setTies(int ties)
+	{
+		this.ties = ties;
 	}
 }
